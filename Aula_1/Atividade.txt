@@ -1,0 +1,47 @@
+%----------------------------------------------%
+%------ Aula 1 -  Treinamento R SmartAgri -----%
+%------- Título: Atividades da Aula 1 ---------%
+%----------- Autor:  Felippe Karp -------------%
+%----------------------------------------------%
+
+Nosso objetivo na primeira aula é nos sentirmos familiarizados com o uso de controle de 
+versão no R, termos, instalação de bibliotecas e funções básicas.
+
+1. Abrir o RStudio e criar um novo projeto com controle de versão;
+
+2. Familiarizar com o ambiente do RStudio;
+	- Onde está o que?
+	- Ajuda
+
+3. R é uma calculadora sofisticada!
+	- Funções básicas de cálculo
+
+4. Alguns atalhos do teclado que facilitam a vida!
+	- Ctrl + Enter
+	- Ctrl + Alt + B
+	- Ctrl + Alt + R
+
+	Quer mais? 
+	Acesse este link: https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts
+
+5. Criação de variáveis;
+	- Não use caracteres especiais!
+	- O R é "case-sensitive"
+	- O R sobrescreve sem pedir sua permissão!
+	- ls()
+
+6. Vamos abrir um arquivo!
+	- .csv - read.csv() ou read.csv2()
+	- .txt - read.delim() ou read.delim2()
+	- excell file - readxl package, read_excel()
+	- outras opções: read.table()...
+
+7. Funções mode(), str(), print(), cat(), paste0()
+
+8. Tarefa: Criar um script que demonstre operacões simples no R usando variáveis, abra um 
+arquivo .csv, .txt e excell, verifica os tipos de variáveis e salva eles em um formato
+diferente do inicial. Ex.: se era .csv, salva como .txt.
+
+Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hopr/basics.html
+
+
