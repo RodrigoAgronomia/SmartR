@@ -1,11 +1,9 @@
 # SmartR
 Smart Agri R training
 
-----------------------------------------------%
-%------ Aula 1 -  Treinamento R SmartAgri -----%
-%---- Título: Passo a passo instação do R -----%
-%----------- Autor:  Felippe Karp -------------%
-%----------------------------------------------%
+
+Passo a passo instação do R 
+Autor:  Felippe Karp 
 
 
 1. Fazer o download do R correspondente ao seu sistema operacional;
@@ -28,11 +26,11 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 6. Agora sim! Para começar a usar o R é só abrir o RStudio!
 
 
-%----------------------------------------------%
-%------ Aula 1 -  Treinamento R SmartAgri -----%
-%------- Título: Atividades da Aula 1 ---------%
-%----------- Autor:  Felippe Karp -------------%
-%----------------------------------------------%
+
+Aula 1 -  Treinamento R SmartAgri
+Atividades da Aula 1
+Autor:  Felippe Karp
+
 
 Nosso objetivo na primeira aula é nos sentirmos familiarizados com o uso de controle de 
 versão no R, termos, instalação de bibliotecas e funções básicas.
