@@ -2,9 +2,9 @@
 Smart Agri R training
 
 
-Passo a passo instação do R 
+##Passo a passo instação do R 
 
-Autor:  Felippe Karp 
+*Autor:  Felippe Karp* 
 
 
 1. Fazer o download do R correspondente ao seu sistema operacional;
@@ -28,11 +28,9 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 
 
 
-Aula 1 -  Treinamento R SmartAgri
+##Aula 1 -  Treinamento R SmartAgri
 
-Atividades da Aula 1
-
-Autor:  Felippe Karp
+*Autor:  Felippe Karp*
 
 
 Nosso objetivo na primeira aula é nos sentirmos familiarizados com o uso de controle de 
