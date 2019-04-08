@@ -2,7 +2,7 @@
 Smart Agri R training
 
 
-##Passo a passo instação do R 
+## Passo a passo instação do R 
 
 *Autor:  Felippe Karp* 
 
@@ -28,7 +28,7 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 
 
 
-##Aula 1 -  Treinamento R SmartAgri
+## Aula 1 -  Treinamento R SmartAgri
 
 *Autor:  Felippe Karp*
 
