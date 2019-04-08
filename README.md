@@ -2,7 +2,7 @@
 Smart Agri R training
 
 
-## Passo a passo instação do R 
+## Passo a passo: instalação do R 
 
 *Autor:  Felippe Karp* 
 
@@ -28,7 +28,7 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 
 
 
-## Aula 1 -  Treinamento R SmartAgri
+## Aula 1 -  Atividades
 
 *Autor:  Felippe Karp*
 
@@ -65,10 +65,47 @@ versão no R, termos, instalação de bibliotecas e funções básicas.
 	- excell file - readxl package, read_excel()
 	- outras opções: read.table()...
 
-7. Funções mode(), str(), print(), cat(), paste0()
-
-8. Tarefa: Criar um script que demonstre operacões simples no R usando variáveis, abra um 
+7. Tarefa: Criar um script que demonstre operacões simples no R usando variáveis, abra um 
 arquivo .csv, .txt e excell, verifica os tipos de variáveis e salva eles em um formato
 diferente do inicial. Ex.: se era .csv, salva como .txt.
 
 Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hopr/basics.html
+
+
+
+## Aula 2 -  Atividades
+
+*Autor:  Felippe Karp*
+
+1. Recapitualando atividades da Aula 1;
+  - Atalhos
+  - Abrindo um arquivo .csv, .txt ou excel
+  - Uso do github
+
+2. Seleção de colunas e linhas;
+  - Criação de critérios de seleção
+  - Criação de variáveis com base em seleção
+  
+3. Criação de novas colunas em um data frame;
+  
+4. Funções mode(), str() e class();
+  - Mudar tipo do objeto 
+    - Ex.: as.numeric(as.character())
+    
+5. Funções: head, summary, plot, hist, names, table, rbind, cbind
+  - names()
+  - head()
+  - summary() 
+    - Atlernativas para obter apenas uma informação são: mean(), min(), max(), median() e quantile()
+  - plot() ou ggplot() 
+    - No caso do ggplot() como a forma de programar é um pouco diferente use essa ferramenta para se acostumar: https://github.com/dreamRs/esquisse e leia mais sobre o ggplot() neste livro https://r4ds.had.co.nz/data-visualisation.html
+  - hist()
+  - table()
+  - rbind()
+  - cbind()
+  
+6. Outras funções: print(), cat(), paste0()
+
+7. Salvar arquivos - .csv, .txt and excell
+
+
