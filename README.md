@@ -78,31 +78,31 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 *Autor:  Felippe Karp*
 
 1. Recapitualando atividades da Aula 1;
-  - Atalhos
-  - Abrindo um arquivo .csv, .txt ou excel
-  - Uso do github
+    - Atalhos
+    - Abrindo um arquivo .csv, .txt ou excel
+    - Uso do github
 
 2. Seleção de colunas e linhas;
-  - Criação de critérios de seleção
-  - Criação de variáveis com base em seleção
+    - Criação de critérios de seleção
+    - Criação de variáveis com base em seleção
   
 3. Criação de novas colunas em um data frame;
   
 4. Funções mode(), str() e class();
-  - Mudar tipo do objeto 
-    - Ex.: as.numeric(as.character())
+    - Mudar tipo do objeto 
+      - Ex.: as.numeric(as.character())
     
 5. Funções: head, summary, plot, hist, names, table, rbind, cbind
-  - names()
-  - head()
-  - summary() 
-    - Atlernativas para obter apenas uma informação são: mean(), min(), max(), median() e quantile()
-  - plot() ou ggplot() 
-    - No caso do ggplot() como a forma de programar é um pouco diferente use essa ferramenta para se acostumar: https://github.com/dreamRs/esquisse e leia mais sobre o ggplot() neste livro https://r4ds.had.co.nz/data-visualisation.html
-  - hist()
-  - table()
-  - rbind()
-  - cbind()
+    - names()
+    - head()
+    - summary() 
+      - Atlernativas para obter apenas uma informação são: mean(), min(), max(), median() e quantile()
+    - plot() ou ggplot() 
+      - No caso do ggplot() como a forma de programar é um pouco diferente use essa ferramenta para se acostumar: https://github.com/dreamRs/esquisse e leia mais sobre o ggplot() neste livro https://r4ds.had.co.nz/data-visualisation.html
+    - hist()
+    - table()
+    - rbind()
+    - cbind()
   
 6. Outras funções: print(), cat(), paste0()
 
