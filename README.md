@@ -98,7 +98,7 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
     - summary() 
       - Atlernativas para obter apenas uma informação são: mean(), min(), max(), median() e quantile()
     - plot() ou ggplot() 
-      - No caso do ggplot() como a forma de programar é um pouco diferente use essa ferramenta para se acostumar: https://github.com/dreamRs/esquisse e leia mais sobre o ggplot() neste livro https://r4ds.had.co.nz/data-visualisation.html
+      - No caso do ggplot(), como a forma de programar é um pouco diferente, use essa ferramenta para se acostumar: https://github.com/dreamRs/esquisse e leia mais sobre o ggplot() neste livro https://r4ds.had.co.nz/data-visualisation.html
     - hist()
     - table()
     - rbind()
