@@ -5,9 +5,9 @@ diretorio = './data'
 
 ##Listar arquivo .csv
 
-file = './data/Colheita.csv'
+file = './data/colheita.csv'
 
-file = list.files(diretorio, pattern = '.csv', full.names = TRUE)
+file = list.files(diretorio, pattern = ',csv', full.names = TRUE)
 
 ##Leitura do arquivo .csv
 
