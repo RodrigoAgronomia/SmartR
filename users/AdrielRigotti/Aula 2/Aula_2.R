@@ -1,6 +1,6 @@
 # Instalar o pacote para qufuncione Install.packags()
 
-install.packages('ggplot2', dep = TRUE)
+#install.packages('ggplot2', dep = TRUE)
 
 #library
 library(ggplot2)
@@ -135,3 +135,5 @@ write.csv(dados, file.path('./data', paste0("SmartAgri_R_", i, ".csv")))
 ?cat()
 
 cat("data", "ja", sep = ",")
+#Interface Gráfica
+esquisse::esquisser()
