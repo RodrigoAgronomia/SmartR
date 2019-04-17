@@ -99,3 +99,9 @@ excel <- list.files(diretorio, pattern = ".xlsx", full.names = TRUE)
 excel
 
 tabela_excel <- read_excel(excel) # teste
+
+setwd("D:/R_LAP/SmartR/users/limajoaquim/Aula_1/")
+write.csv(tabela_excel,file = "tabela.csv", row.names = FALSE)
+
+
+
