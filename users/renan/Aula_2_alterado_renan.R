@@ -1,4 +1,7 @@
 #Aula 2 - alterado Renan
+require(ggplot2)
+require(esquisse)
+
 diretorio = './data'
 
 #Abrir um arquivo .csv
@@ -12,8 +15,12 @@ file = list.files(diretorio, pattern = '.csv', full.names = TRUE)
 ##Leitura do arquivo .csv
 
 dados = read.csv(file)
+plot(dados$Yield)
+hist(dados$Yield)
 
 #Selecionar uma linha dos dados
+#o comando "::" serve pra acessar todos os argumentos do package
+esquisse::esquisser()
 
 linha = dados[1,]
 
