@@ -77,7 +77,7 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 
 *Autor:  Felippe Karp*
 
-1. Recapitualando atividades da Aula 1;
+1. Recapitulando atividades da Aula 1;
     - Atalhos
     - Abrindo um arquivo .csv, .txt ou excel
     - Uso do github
@@ -108,8 +108,21 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 
 7. Salvar arquivos - .csv, .txt and excell
 
-8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresente uma estatistica descritiva dos dados e gere pelo menos 3 diferentes (estilo) gráficos usando ggplot. 
+8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresentar uma estatistica descritiva dos dados e gerar pelo menos 3 diferentes gráficos usando ggplot. 
 
-  DESAFIO: Exportar o grafico como uma imagem por meio de uma linha de comando e usar o paste0 para nomear.
+    - DESAFIO: Exportar o grafico como uma imagem por meio de uma linha de comando e usar o paste0 para nomear.
+
+## Aula 3 -  Atividades
+
+*Autor:  Felippe Karp*
+
+Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquinho e vamos começar a lidar com dados espaciais. Então vamos começar olhando o arquivo!
+
+1. Abrir novo arquivo 'Colheita_Soja.csv';
+    - R vai abrir e entender o arquivo como um data frame. Portanto, como mostrar para o R que é um arquivo espacial?
+    - coordinates(data) = ~x+y - pacote sp
+    - st_as_sf(df, coords = c("X", "Y")) - pacote sf
+
+2. Feito isso, vamos dar uma olhada nos dados e usar um pouco do que já usamos em um data frame!
 
 
