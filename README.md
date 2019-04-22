@@ -108,7 +108,7 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 
 7. Salvar arquivos - .csv, .txt and excell
 
-8. TAREFA: Criar um scripte que abra um arquivo de dados que vocês possuem, apresente uma estatistica descritiva dos dados e gere pelo menos 3 diferentes (estilo) gráficos usando ggplot. 
+8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresente uma estatistica descritiva dos dados e gere pelo menos 3 diferentes (estilo) gráficos usando ggplot. 
 
   DESAFIO: Exportar o grafico como uma imagem por meio de uma linha de comando e usar o paste0 para nomear.
 
