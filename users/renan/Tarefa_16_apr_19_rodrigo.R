@@ -8,43 +8,44 @@ rst <- readRDS("data/simul.rds")
 field <- readRDS("data/field.rds")
 
 # Criando grid de poligonos (1 ha);
-pols <- st_make_grid(field, cellsize = c(100, 100))
+pols<-st_make_grid(field,cellsize=c(100,100))
 
 # Plotando raster;
 plot(rst)
 plot(rst$sim1)
 
 # Plotando grid;
-plot(st_geometry(pols), add = TRUE, lwd = 2)
+plot(st_geometry(pols),add=TRUE,lwd=2)
 
 # Convertendo raster para formato sf;
-rst_pts <- st_as_sf(rasterToPoints(rst, spatial = TRUE))
+rst_pts<-st_as_sf(rasterToPoints(rst,spatial=TRUE))
 
 # Convertendo poligonos para formato sf;
-pols <- st_as_sf(data.frame(id = 1:length(pols), pols))
+pols<-st_as_sf(data.frame(id=1:length(pols),pols))
 
 # Selecionando poligono 20 do grid de 1 ha;
-pols20 <- pols[20, ]
+pols20<-pols[20,]
 pols20
 plot(st_geometry(pols))
-plot(st_geometry(pols20), col = 2, add = TRUE)
+plot(st_geometry(pols20),col=2,add=TRUE)
 
 # Selecionando pontos que correspondem a poligono 20;
-rst_pts20 <- rst_pts[pols20, ]
+rst_pts20<-rst_pts[pols20,]
 rst_pts20
 plot(st_geometry(pols))
-plot(st_geometry(pols20), lwd = 3, add = TRUE)
-plot(rst_pts20, add = TRUE)
+plot(st_geometry(pols20),lwd=3,add=TRUE)
+plot(rst_pts20,add=TRUE)
 
 # Construção do loop para extrair a média de cada poligono do grid de 1 ha;
 for (i in pols$id) {
-  subpol <- pols[pols$id == i, ]
-  subpol
-  sub_pts_rst <- rst_pts[subpol, ]
-  sub_pts_rst
-  for (v in names(rst_pts)[1:10]) {
-    pols[pols$id == i, v] <- mean(sub_pts_rst[[v]])
-  }
+          subpol<-pols[pols$id==i,]
+          subpol
+          sub_pts_rst<-rst_pts[subpol,]
+          sub_pts_rst
+    for (v in names(rst_pts)[1:10]){              #Loop para atribuição das médias de cada poligono;
+    pols[pols$id==i,v]<-mean(sub_pts_rst[[v]])
+    }
 }
 
-plot(pols)
+pols[[v]]
+plot(pols[[v]])
