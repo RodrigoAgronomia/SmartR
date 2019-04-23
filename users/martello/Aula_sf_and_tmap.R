@@ -70,16 +70,18 @@ rst_pts20 <- rst_pts[pols20, ]
 # Construir um loop para calcular a media dos valores
 # de todas as simulações em cada um dos polígonos do grid.
 # Juntar ao conjuto de dados dos poligonos.
+
+resumo<- list()
 for (i in pols$id) {
   subpol <- pols[pols$id == i, ]
   sub_pts <- rst_pts[subpol, ]
-  sub_pts$geometry <- NULL
-  mmmm <- apply(sub_pts, 2, mean, na.rm = TRUE)
+  sub_pts <- st_set_geometry(sub_pts, NULL)  #sub_pts$geometry <- NULL
+  resumo[[i]] <- apply(sub_pts, 2, mean, na.rm = TRUE)
 
 }
-
-plot(subpol)
-
+resumodf <- do.call(rbind, resumo)
+uniao <- cbind(pols,resumodf)
+plot(uniao)
 polsf <- merge(pols, mmmm)
 
 
