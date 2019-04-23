@@ -95,3 +95,5 @@ excel <- list.files(diretorio, pattern = ".xlsx", full.names = TRUE)
 excel
 
 tabela_excel <- read_excel(excel) # teste
+print('executado ate o fim!')
+
