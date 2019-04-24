@@ -76,30 +76,25 @@ rst_pts20 <- rst_pts[pols20, ]
 # Construir um loop para calcular a media dos valores
 # de todas as simulações em cada um dos polígonos do grid.
 # Juntar ao conjuto de dados dos poligonos.
-pols
 
-#codigo copiado do Renan
+#Resolução da tarefa
+
+resumo<-list() #cria lista para valores das medias
+
 for (i in pols$id) {
   subpol <- pols[pols$id == i, ]
 
   sub_pts <- rst_pts[subpol, ]
   
-  for (v in names(rst_pts)[1:10]){              #Loop para atribuição das médias de cada poligono;
-    pols[pols$id==i,v]<-mean(sub_pts[[v]])
+  #subtrai os valores da coluna geometria
+ sub_pts <- st_set_geometry(sub_pts,NULL)
  
-  }
+ resumo[[i]] <- apply(sub_pts, 2,mean,na.rm=TRUE) #aplica as medias a lista 
+ 
 } 
 
-pols[[v]]
-plot(pols[[v]])
+resumodf <- do.call(rbind, resumo) #converte a lista em matrix 
 
-plot(st_geometry(pols20))
-plot(rst_pts20, add = TRUE)
+uniao<- cbind(pols,resumodf) # faz a união dos dados mais a geometria
 
-plot(st_geometry(pols))
-plot(st_geometry(pols20), lwd = 5, add = TRUE)
-plot(st_geometry(rst_pts20), add = TRUE)
-
-saveRDS(pols, "data/grid_pols.rds")
-
-write_sf(pols, "data/grid_pols.gpkg")
+plot(uniao)
