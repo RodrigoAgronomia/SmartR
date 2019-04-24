@@ -125,4 +125,14 @@ Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquin
 
 2. Feito isso, vamos dar uma olhada nos dados e usar um pouco do que já usamos em um data frame!
 
+## Introdução ao R e GitHub (09/04/2019)
+
+https://mediaspace.illinois.edu/media/t/1_puyino3e/
+
+## Pacotes "sf" e "tmap" (16/04/2019)
+
+https://mediaspace.illinois.edu/media/t/1_2ogep7hr
+
+## Pacote "dplyr" (23/04/2019)
+
 
