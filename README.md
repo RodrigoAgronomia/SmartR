@@ -135,4 +135,5 @@ https://mediaspace.illinois.edu/media/t/1_2ogep7hr
 
 ## Pacote "dplyr" (23/04/2019)
 
+https://mediaspace.illinois.edu/media/t/1_9srtfxic
 
