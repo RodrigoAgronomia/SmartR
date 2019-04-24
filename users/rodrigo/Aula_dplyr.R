@@ -33,8 +33,11 @@ table(ov)
 # Set the geometry to null, converting back to a data frame:
 rst_pts <- st_set_geometry(rst_pts, NULL)
 
+# Makes a subgroup:
+rst_pts$subid <- 1:2
+
 # Group points based on the polygon id:
-rst_pts <- group_by(rst_pts, id)
+rst_pts <- group_by(rst_pts, id, subid)
 
 # Calculates de average of every collum for each group:
 rst_rsm <- summarise_all(rst_pts, mean)
