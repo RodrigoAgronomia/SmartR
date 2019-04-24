@@ -43,22 +43,18 @@ raster_pts = st_as_sf(rasterToPoints(rast_10c, spatial = TRUE))
 
 teste = raster_pts
 
-for(i in parcelas$id){
-  sub_parc = parcelas[parcelas$id == i,]
+resumo = list()
+for(i in parcelas$id) {
+  sub_parc = parcelas[parcelas$id == i, ]
   sub_pts = raster_pts[sub_parc,]
-  variavel = apply(sub_pts, 2, mean, na.rm = TRUE)
-
+  sub_pts = st_set_geometry(sub_pts, NULL)
+  resumo[[i]] = apply(sub_pts, 2, mean, na.rm = TRUE)
+  
 }
-  
-  
-teste = sub_pts
-teste$geometry = NULL
-variavel = apply(teste, 2, mean, na.rm = TRUE)     
 
-parcelas
+resumodf <- do.call(rbind, resumo)
+uniao <- cbind(parcelas,resumodf)
+plot(uniao)
 
-teste22 = teste2
-teste22$id = NULL
-plot(teste22$geometry)
 
-variavel
+
