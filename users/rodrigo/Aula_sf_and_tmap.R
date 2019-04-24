@@ -25,6 +25,9 @@ qtm(pols, fill = 'id')
 tm <- tm_shape(pols) + tm_polygons('id')
 tm + tm_shape(field) + tm_borders(lwd = 10)
 
+tmap_mode("view")
+#tmap_save()
+
 # Plot the raster using the standard plot:
 plot(rst)
 plot(rst$sim1)
