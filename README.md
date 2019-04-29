@@ -119,11 +119,19 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquinho e vamos começar a lidar com dados espaciais. Então vamos começar olhando o arquivo!
 
 1. Abrir novo arquivo 'Colheita_Soja.csv';
-    - R vai abrir e entender o arquivo como um data frame. Portanto, como mostrar para o R que é um arquivo espacial?
-    - coordinates(data) = ~x+y - pacote sp
-    - st_as_sf(df, coords = c("X", "Y")) - pacote sf
+    - Primeiro é necessário definir o diretório e obter o caminho do arquivo (DICA: list.files());
+    - Tendo obtido o caminho para o arquivo, usar a função read.csv() para abrir o arquivo;
+    - Contudo, o R vai abrir e entender o arquivo como um data frame. Portanto, como mostrar para o R que é um arquivo espacial?
 
-2. Feito isso, vamos dar uma olhada nos dados e usar um pouco do que já usamos em um data frame!
+2. Dizer para o R que aquele data frame na realidade é um arquivo espacial;
+    - Usando a biblioteca sp: coordinates(data) = ~x+y - pacote sp
+    - Usando a biblioteca sf: st_as_sf(df, coords = c("X", "Y")) - pacote sf
+    - Detalhe os arquivos criados não possuem as informações sobre CRS... é necessario adicionar...
+
+3. Feito isso, vamos dar uma olhada nos dados e usar um pouco do que já usamos em um data frame!
+    - Função plot() para dados espaciais (diferença entre usar '$' e '[]')
+
+4. TAREFA: Utilizando os arquivos criados, criar critérios de seleção dos dados (ex.: Produtividade > Média da Produtividade) e gerar mapas.
 
 ## Introdução ao R e GitHub (09/04/2019)
 

@@ -23,6 +23,8 @@ str(dados)
 projlatlong = CRS('+init=epsg:4326')
 proj4string(dados) = projlatlong
 
+proj4string(dados) = CRS('+init=epsg:4326')
+
 #Transformar para UTM
 projUTM = CRS('+init=epsg:32722')
 dados = spTransform(dados, projUTM)
@@ -31,6 +33,7 @@ coordinates(dados)
 
 #df como espacial usando biblioteca sf
 dados_sf = st_as_sf(dados_df, coords = c('Longitude', 'Latitude'))
+str(dados_sf)
 
 #Definir projecao
 st_crs(dados_sf) = 4326
@@ -59,6 +62,10 @@ d_sf = read_sf(file_gpkg)
 
 #Plotar o mapa
 plot(d_sf['Field'], col = 'red')
+?plot
+
+
+
 
 
 
