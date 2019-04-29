@@ -5,7 +5,6 @@ library(readxl)
 # Ajuda do R - usar interrogacao antes do nome da funcao
 ?ls
 
-
 # Operacoes basicas - +,-,*,/
 2 * 2
 2 + 2
@@ -50,7 +49,7 @@ ls()
 
 
 # Acessando um diretorio
-diretorio <- "C:/MSc_Felippe/SmartR/Aula_1/Dados"
+diretorio <- "C:/CursoR/SmartR/data"
 
 diretorio <- "data"
 

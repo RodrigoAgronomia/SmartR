@@ -7,6 +7,7 @@ library(tmap)
 rst <- readRDS("data/simul.rds")
 field <- readRDS("data/field.rds")
 
+
 ## create a polygon grid --------------------------------------------------
 pols <- st_make_grid(field, cellsize = c(100, 100))
 pols <- st_as_sf(data.frame(id = 1:length(pols), pols))
@@ -23,10 +24,12 @@ qtm(pols, fill = "id")
 
 # add the field borders:
 tm <- tm_shape(pols) + tm_polygons("id")
-tm + tm_shape(field) + tm_borders(lwd = 10)
+tm + tm_shape(field) + tm_borders(lwd = 3)
 
+#Vizualização interativa
 tmap_mode("view")
-#tmap_save()
+
+
 
 # Plot the raster using the standard plot:
 plot(rst)
@@ -51,7 +54,7 @@ tm_shape(rst) + tm_raster("sim1", style = "quantile") +
   tm_grid(alpha = 0.2) +
   tm_compass(position = c("left", "bottom")) +
   tm_scale_bar(position = c("left", "bottom")) +
-  tm_credits("Author: Trevisan, R.G.",
+  tm_credits("Author: Lima, J.L.A.",
     size = 0.7, align = "left",
     position = c("left", "bottom")
   ) +

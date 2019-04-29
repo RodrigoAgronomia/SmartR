@@ -25,9 +25,6 @@ qtm(pols, fill = "id")
 tm <- tm_shape(pols) + tm_polygons("id")
 tm + tm_shape(field) + tm_borders(lwd = 10)
 
-tmap_mode("view")
-#tmap_save()
-
 # Plot the raster using the standard plot:
 plot(rst)
 plot(rst$sim1)
@@ -73,12 +70,20 @@ rst_pts20 <- rst_pts[pols20, ]
 # Construir um loop para calcular a media dos valores
 # de todas as simulações em cada um dos polígonos do grid.
 # Juntar ao conjuto de dados dos poligonos.
+
+resumo<- list()
 for (i in pols$id) {
   subpol <- pols[pols$id == i, ]
   sub_pts <- rst_pts[subpol, ]
-  # mmmm <- apply(sub_pts, 2, mean, na.rm = TRUE)
+  sub_pts <- st_set_geometry(sub_pts, NULL)  #sub_pts$geometry <- NULL
+  resumo[[i]] <- apply(sub_pts, 2, mean, na.rm = TRUE)
+
 }
-# polsf <- merge(pols, mmmm)
+resumodf <- do.call(rbind, resumo)
+uniao <- cbind(pols,resumodf)
+plot(uniao)
+polsf <- merge(pols, mmmm)
+
 
 plot(st_geometry(pols20))
 plot(rst_pts20, add = TRUE)

@@ -1,25 +1,36 @@
-# Instalar o pacote para qufuncione Install.packags()
-
-#install.packages('ggplot2', dep = TRUE)
-
 #library
 library(ggplot2)
 
-#Abrir diretorio
 
 diretorio = './data'
 
 #Abrir um arquivo .csv
 
 ##Listar arquivo .csv
-
-file = './data/Colheita.csv'
-
 file = list.files(diretorio, pattern = '.csv', full.names = TRUE)
 
 ##Leitura do arquivo .csv
 
-dados = read.csv(file)
+dados = read.csv(file[1])
+
+#plot padrão R
+plot(dados$Yield)
+hist(dados$Yield)
+
+plot(dados$Yield, dados$Flow, xlab='Yield (bu/ac)',ylab='Flow')
+hist(dados$Yield, main='Histogram Yield', col='blue')
+
+#Plot com ggplot2
+esquisse::esquisser()
+
+#codigo copiado da interface ggplot2 e esquisse
+ggplot(data = dados) +
+  aes(x = Yield) +
+  geom_histogram(bins = 57, fill = "#08519c") +
+  labs(title = "Histograma Produtividade",
+       x = "produtividade",
+       y = "frequencia") +
+  theme_minimal()
 
 #Selecionar uma linha dos dados
 
@@ -135,5 +146,3 @@ write.csv(dados, file.path('./data', paste0("SmartAgri_R_", i, ".csv")))
 ?cat()
 
 cat("data", "ja", sep = ",")
-#Interface Gráfica
-esquisse::esquisser()

@@ -1,84 +1,59 @@
-# Instalar o pacote para qufuncione Install.packags()
+#Diretorio no projeto CursoR
+dir = "./data"
 
-#install.packages('ggplot2', dep = TRUE)
+#Listar arquivo .csv
+file = list.files(dir, pattern = '.csv', full.names = TRUE)
 
-#library
-library(ggplot2)
-
-#Abrir diretorio
-
-diretorio = './data'
-
-#Abrir um arquivo .csv
-
-##Listar arquivo .csv
-
-file = './data/Colheita.csv'
-
-file = list.files(diretorio, pattern = '.csv', full.names = TRUE)
-
-##Leitura do arquivo .csv
-
+#Leitura do arquivo .csv
 dados = read.csv(file)
 
 #Selecionar uma linha dos dados
-
 linha = dados[1,]
 
-#Selecionar um dado de uma linha especifica
-
-dados[30,1]
+#Selecionar um dado especifico
+dados[30,13]
 
 #Selecionar uma coluna especifica
-
 coluna = dados[,2]
+#coluna = dados$Yield
 
-coluna = dados$Yield
-
-#Arrumando problemas com a leitura de dados como fator
-str(dados)
-
-dados$Yield = as.numeric(as.character(dados$Yield))
-
-str(dados)
+#Corrigir tipo de dados
+#dados$Yield = as.numeric(as.character(dados$Yield))
 
 #Criando criterio de selecao
 media = mean(dados$Yield)
+str(dados)
 
-crit = dados$Yield >= media
+criterio = dados$Yield >= media
+alta_prod = dados[criterio,]
+min(alta_prod$Yield)
 
-alt_prod = dados[crit,]
-min(alt_prod$Yield)
-
-#Criando um criterio mais complexo
-
+#Criando criterio complexo
 media_flow = mean(dados$Flow)
+criterio2 = dados$Yield >= media & dados$Flow >= media_flow
+alta_flow = dados[criterio2,]
 
-crit2 = dados$Yield >= media & dados$Flow >=media_flow
+min(alta_flow$Yield)
+min(alta_flow$Flow)
 
-alt_prd_fl = dados[crit2,]
+#Criar nova coluna no data frame
+dados$NovaArea = dados$Distance*dados$Width #em m²
 
-min(alt_prd_fl$Yield)
-min(alt_prd_fl$Flow)
-
-#Criar uma nova coluna no data frame
-dados$NovaArea = (dados$Distance*dados$Width)/10000 
-
-#Verificar o nome das minhas colunas
+#Verificar o nome das colunas
 names(dados)
-#names(dados) = c('Fernando', 'Felippe', 'Marccos', 'Rodrigo', 'Joao', 'Fernando', 'Felippe', 'Marccos', 'Rodrigo', 'Joao', '1', '2', '3', '4')
+#renomear variaveis
+#names(dados) = c('1','2','3','4','5','6','7')
 
-#head() - apresenta os primeiros valores
+#head - apresenta os primeiros valores
 ?head
 head(dados, 10)
 tail(dados)
 
-#summary() - retorna uma estatistica descritiva dos dados
+#summary - retorna uma estatistica descritiva dos dados
 summary(dados)
 summary(dados$Yield)
 
 #Funcoes que apresentam os resultados da estatisca descritiva
-
 mean(dados$Yield)
 min(dados$Yield)
 max(dados$Yield)
@@ -90,6 +65,7 @@ plot(dados$Yield, dados$Flow, xlab = 'Yield (bu/ac)', ylab = 'Flow')
 hist(dados$Yield, main = 'Histograma Yield', col = 'blue')
 
 #Graficos com ggplot
+library(ggplot2)
 esquisse::esquisser()
 
 ggplot(data = dados) +
@@ -100,15 +76,13 @@ ggplot(data = dados) +
        y = "Index") +
   theme_grey()
 
-#table() - classifica e conta os dados por classificacao
+#table - classifica e conta os dados por classificacao
 ?table
-
 table(dados$CropName)
 table(dados$Yield) #Nao faz sentido utilizao o table() - porque e numerico 
 table(dados$GrowerName)
 
-
-#bind() - unir!
+#bind - unir!
 ?bind
 rbind()#adiciona linha
 cbind()#adiciona coluna
@@ -131,9 +105,5 @@ paste0("Eu ", "fui ", "no ", "Brasil")
 ?write.csv
 write.csv(dados, file.path('./data', paste0("SmartAgri_R_", i, ".csv")))
 
-
 ?cat()
-
 cat("data", "ja", sep = ",")
-#Interface Gráfica
-esquisse::esquisser()

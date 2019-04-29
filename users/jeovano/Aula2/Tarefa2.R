@@ -7,6 +7,7 @@ library(tmap)
 rst <- readRDS("data/simul.rds")
 field <- readRDS("data/field.rds")
 
+
 ## create a polygon grid --------------------------------------------------
 pols <- st_make_grid(field, cellsize = c(100, 100))
 pols <- st_as_sf(data.frame(id = 1:length(pols), pols))
@@ -23,10 +24,12 @@ qtm(pols, fill = "id")
 
 # add the field borders:
 tm <- tm_shape(pols) + tm_polygons("id")
-tm + tm_shape(field) + tm_borders(lwd = 10)
+tm + tm_shape(field) + tm_borders(lwd = 3)
 
+#Vizualização interativa
 tmap_mode("view")
-#tmap_save()
+
+
 
 # Plot the raster using the standard plot:
 plot(rst)
@@ -51,7 +54,7 @@ tm_shape(rst) + tm_raster("sim1", style = "quantile") +
   tm_grid(alpha = 0.2) +
   tm_compass(position = c("left", "bottom")) +
   tm_scale_bar(position = c("left", "bottom")) +
-  tm_credits("Author: Trevisan, R.G.",
+  tm_credits("Author: Lima, J.L.A.",
     size = 0.7, align = "left",
     position = c("left", "bottom")
   ) +
@@ -73,20 +76,25 @@ rst_pts20 <- rst_pts[pols20, ]
 # Construir um loop para calcular a media dos valores
 # de todas as simulações em cada um dos polígonos do grid.
 # Juntar ao conjuto de dados dos poligonos.
+
+#Resolução da tarefa
+
+resumo<-list() #cria lista para valores das medias
+
 for (i in pols$id) {
   subpol <- pols[pols$id == i, ]
+
   sub_pts <- rst_pts[subpol, ]
-  # mmmm <- apply(sub_pts, 2, mean, na.rm = TRUE)
-}
-# polsf <- merge(pols, mmmm)
+  
+  #subtrai os valores da coluna geometria
+ sub_pts <- st_set_geometry(sub_pts,NULL)
+ 
+ resumo[[i]] <- apply(sub_pts, 2,mean,na.rm=TRUE) #aplica as medias a lista 
+ 
+} 
 
-plot(st_geometry(pols20))
-plot(rst_pts20, add = TRUE)
+resumodf <- do.call(rbind, resumo) #converte a lista em matrix 
 
-plot(st_geometry(pols))
-plot(st_geometry(pols20), lwd = 5, add = TRUE)
-plot(st_geometry(rst_pts20), add = TRUE)
+uniao<- cbind(pols,resumodf) # faz a união dos dados mais a geometria
 
-saveRDS(pols, "data/grid_pols.rds")
-
-write_sf(pols, "data/grid_pols.gpkg")
+plot(uniao)
