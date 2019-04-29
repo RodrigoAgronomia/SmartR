@@ -50,3 +50,5 @@ names(dados)
 #mudar nome das colunas - deve ter o mesmo numero de coluna
 names(dados) = c("a","b","c","d","e","f","g","h","i","j","1","2","3")
 
+#aula terminou aqui
+
