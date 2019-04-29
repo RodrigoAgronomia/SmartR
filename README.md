@@ -29,6 +29,7 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 
 
 ## Aula 1 -  Atividades
+https://lsumail2-my.sharepoint.com/:v:/g/personal/fhoffm3_lsu_edu/EQ2TrSoColZJmvCHUXbrimUBPvjzrqkXQukXL7jmwlxMqw?e=reoOqs
 
 *Autor:  Felippe Karp*
 
@@ -74,6 +75,7 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 
 
 ## Aula 2 -  Atividades
+https://lsumail2-my.sharepoint.com/:v:/g/personal/fhoffm3_lsu_edu/EbKVkrEMECxOr7rsy5WG64oBn-00BTAEq9cxwjWY1ijeAQ?e=8xTdFC
 
 *Autor:  Felippe Karp*
 
