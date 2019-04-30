@@ -29,7 +29,6 @@ Portanto, usa-se o Rstudio, que tarnsforma a experiência e uso do R muito mais 
 
 
 ## Aula 1 -  Atividades
-https://lsumail2-my.sharepoint.com/:v:/g/personal/fhoffm3_lsu_edu/EQ2TrSoColZJmvCHUXbrimUBPvjzrqkXQukXL7jmwlxMqw?e=reoOqs
 
 *Autor:  Felippe Karp*
 
@@ -72,10 +71,12 @@ diferente do inicial. Ex.: se era .csv, salva como .txt.
 
 Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hopr/basics.html
 
+8. Acesse a video aula em: https://youtu.be/gpTj46WPlYU
+
 
 
 ## Aula 2 -  Atividades
-https://lsumail2-my.sharepoint.com/:v:/g/personal/fhoffm3_lsu_edu/EbKVkrEMECxOr7rsy5WG64oBn-00BTAEq9cxwjWY1ijeAQ?e=8xTdFC
+
 
 *Autor:  Felippe Karp*
 
@@ -110,7 +111,9 @@ https://lsumail2-my.sharepoint.com/:v:/g/personal/fhoffm3_lsu_edu/EbKVkrEMECxOr7
 
 7. Salvar arquivos - .csv, .txt and excell
 
-8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresentar uma estatistica descritiva dos dados e gerar pelo menos 3 diferentes gráficos usando ggplot. 
+8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresentar uma estatistica descritiva dos dados e gerar pelo menos 3 diferentes gráficos usando ggplot.
+
+9. Acesse as video aulas relacionadas a este tópico em: https://youtu.be/eObPJKlsnxo e https://youtu.be/fgY7TKHdHPI 
 
     - DESAFIO: Exportar o grafico como uma imagem por meio de uma linha de comando e usar o paste0 para nomear.
 
@@ -134,6 +137,8 @@ Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquin
     - Função plot() para dados espaciais (diferença entre usar '$' e '[]')
 
 4. TAREFA: Utilizando os arquivos criados, criar critérios de seleção dos dados (ex.: Produtividade > Média da Produtividade) e gerar mapas.
+
+5. Acesse a video aula em: https://youtu.be/vG84WpvDYzA
 
 ## Introdução ao R e GitHub (09/04/2019)
 
