@@ -140,6 +140,7 @@ Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquin
 
 5. Acesse a video aula em: https://youtu.be/vG84WpvDYzA
 
+
 ## Introdução ao R e GitHub (09/04/2019)
 
 https://mediaspace.illinois.edu/media/t/1_puyino3e/
