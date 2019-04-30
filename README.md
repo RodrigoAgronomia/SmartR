@@ -113,9 +113,9 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
 
 8. TAREFA: Criar um script que abra um arquivo de dados que vocês possuem, apresentar uma estatistica descritiva dos dados e gerar pelo menos 3 diferentes gráficos usando ggplot.
 
-9. Acesse as video aulas relacionadas a este tópico em: https://youtu.be/eObPJKlsnxo e https://youtu.be/fgY7TKHdHPI 
-
     - DESAFIO: Exportar o grafico como uma imagem por meio de uma linha de comando e usar o paste0 para nomear.
+    
+9. Acesse as video aulas relacionadas a este tópico em: https://youtu.be/eObPJKlsnxo e https://youtu.be/fgY7TKHdHPI 
 
 ## Aula 3 -  Atividades
 
