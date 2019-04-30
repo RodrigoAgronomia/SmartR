@@ -79,7 +79,7 @@ plot(v,model = m, plot.numbers = TRUE,
 
 
 ## ordinary kriging -----------------------------------------------------
-OK = krige(CE_15000 ~ 1, CE, newdata = as_Spatial(grid),
+OK = krige(CE_15000 ~ 1, CE, newdata = grid,
            model = m, maxdist = 100, nmax = 10)
 
 ## crop to the original boudary -----------------------------------------
