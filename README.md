@@ -153,3 +153,6 @@ https://mediaspace.illinois.edu/media/t/1_2ogep7hr
 
 https://mediaspace.illinois.edu/media/t/1_9srtfxic
 
+## Pacote "gstat" (30/04/2019)
+
+https://mediaspace.illinois.edu/media/t/0_kl2vp986
