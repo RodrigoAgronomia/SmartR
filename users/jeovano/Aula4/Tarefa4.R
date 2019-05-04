@@ -31,33 +31,37 @@ field = st_transform(field, 26915)
 st_coordinates(field)
 
 ##use the function qtm - Quick thematic map - by jeovano
-qtm(field)
+##dev.off()
 qtm(CE, symbols.col =  'CE_15000')
+qtm(field)
 
 
 ## plot the data and boundary ---------------------------------------------
-##plot(CE['CE_15000'], reset = FALSE)
-##plot(field, col = 'transparent', add = TRUE)
-# dev.off()
+#plot(CE['CE_15000'], reset = FALSE)
+#plot(field, col = 'transparent', add = TRUE)
+dev.off()
 
 ## creat a buffer - objective: exclude the heaslands ----------------------
-field_b = st_buffer(field, dist = -8)
-
-##plot(CE['CE_15000'], reset = FALSE)
-##plot(field_b, col = 'transparent', add = TRUE)
-# dev.off()
+field_b = st_buffer(field, dist = -18)
+qtm(CE, symbols.col =  'CE_15000')
+qtm(field_b)
+#plot(CE['CE_15000'], reset = FALSE)
+#plot(field_b, col = 'transparent', add = TRUE)
+##dev.off()
 
 ## clip the data using the created buffer ---------------------------------
 
 ov <- st_over(CE, st_geometry(field_b))
 CE$Headland <- is.na(ov) ## ov foi criada, com todos os campos NA
 
-plot(CE["Headland"])
+#plot(CE["Headland"])
+qtm(CE["Headland"])
 
 CE = CE[!CE$Headland,] ##Essa funcão esta zerando a variável CE
 
+qtm(CE['CE_15000'])
+#plot(CE['CE_15000'])
 
-plot(CE['CE_15000'])
 
 hist(CE$CE_15000)
 ## Geostatistic Def.: Geostatistics is a set of models and methods that are designed to study variables which
