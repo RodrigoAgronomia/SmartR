@@ -50,7 +50,6 @@ qtm(rst$sim1)
 qtm(pols_rsm, 'sim1')
 
 ## Pipe  ----------------------------------------------------------
-
 pols_rsm <- rst %>%
   rasterToPoints(spatial = TRUE) %>% 
   st_as_sf() %>% 
@@ -58,7 +57,15 @@ pols_rsm <- rst %>%
   st_set_geometry(NULL) %>%
   group_by(id) %>%  
   summarise_all(mean) %>%
+  group_by(id) %>% 
   summarise_all(median) %>%
+  group_by(id) %>% 
   summarise_all(sd) %>%
-  summarise_all(quantile(0.95)) %>%
   left_join(pols, ., by = 'id')
+
+
+# Makes a simple map to compare the raster and polygon results:
+qtm(rst$sim1)
+qtm(pols_rsm, 'sim1')
+
+write_sf(pols_rsm, "data/pols_rsm.gpkg")
