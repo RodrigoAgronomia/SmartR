@@ -50,10 +50,11 @@ qtm(pols, fill = "id")
 
 ## creat a buffer - objective: exclude the heaslands ----------------------
 field_b = st_buffer(field, dist = -18)
-qtm(CE, symbols.col =  'CE_15000')
-##tm_shape(CE)+tm_symbols('CE_15000')
-qtm(field_b)
+##qtm(CE, symbols.col =  'CE_15000')
+##qtm(field_b)
 ##dev.off()
+
+##use the function tmap to overlay - by jeovano
 tm <- tm_shape(pols) + tm_polygons("id")
 tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000')
 
@@ -124,10 +125,8 @@ rst<-raster(field,res=c(1,1))
 gOK = gstat(gOK,'CE', formula=CE_15000 ~ 1, CE, model=m,maxdist=100,nmax = 10)
 OK=interpolate(rst,gOK)
 pred<-mask(crop(OK,field),field)
-##plot(pred)
-##Define Plot mode on TM function - by jeovano
+
+
+##Define View mode on TM function em plot prediction - by jeovano
 tmap_mode("view")
 qtm(pred)
-
-##tm <- tm_shape(pols) + tm_polygons("id")
-##tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000')
