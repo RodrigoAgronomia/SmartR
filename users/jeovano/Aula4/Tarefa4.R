@@ -30,24 +30,32 @@ st_coordinates(field)
 field = st_transform(field, 26915)
 st_coordinates(field)
 
+##Define Plot mode on TM function - by jeovano
+tmap_mode("plot")
+
 ##use the function qtm - Quick thematic map - by jeovano
-##dev.off()
 qtm(CE, symbols.col =  'CE_15000')
 qtm(field)
 
+## create a polygon grid --------------------------------------------------
+pols <- st_make_grid(field, cellsize = c(10, 10), square = FALSE)
+pols <- st_as_sf(data.frame(id = 1:length(pols), pols))
 
-## plot the data and boundary ---------------------------------------------
-#plot(CE['CE_15000'], reset = FALSE)
-#plot(field, col = 'transparent', add = TRUE)
-dev.off()
+## Making Plots  ----------------------------------------------------------
+# plot using the standard tmap layout:
+qtm(pols)
+
+# use the id to fill the polygons:
+qtm(pols, fill = "id")
 
 ## creat a buffer - objective: exclude the heaslands ----------------------
 field_b = st_buffer(field, dist = -18)
 qtm(CE, symbols.col =  'CE_15000')
+##tm_shape(CE)+tm_symbols('CE_15000')
 qtm(field_b)
-#plot(CE['CE_15000'], reset = FALSE)
-#plot(field_b, col = 'transparent', add = TRUE)
 ##dev.off()
+tm <- tm_shape(pols) + tm_polygons("id")
+tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000')
 
 ## clip the data using the created buffer ---------------------------------
 
@@ -69,8 +77,8 @@ hist(CE$CE_15000)
 ## Access https://journal.r-project.org/archive/2016-1/na-pebesma-heuvelink.pdf
 
 ## creat a grid to interpolate -------------------------------------------
-grid = st_make_grid(field, cellsize = c(10, 10))
-plot(grid)
+##grid = st_make_grid(field, cellsize = c(10, 10))
+##plot(grid)
 plot(st_geometry(field), add=TRUE)
 plot(st_geometry(CE), add=TRUE)
 
@@ -116,5 +124,10 @@ rst<-raster(field,res=c(1,1))
 gOK = gstat(gOK,'CE', formula=CE_15000 ~ 1, CE, model=m,maxdist=100,nmax = 10)
 OK=interpolate(rst,gOK)
 pred<-mask(crop(OK,field),field)
-plot(pred)
+##plot(pred)
+##Define Plot mode on TM function - by jeovano
+tmap_mode("view")
+qtm(pred)
 
+##tm <- tm_shape(pols) + tm_polygons("id")
+##tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000')
