@@ -52,6 +52,16 @@ names(prod_clean)[17] = 'Yield_ton_ha'
 #Plot the area
 plot(prod_clean['Yield_ton_ha'])
 
+#Delete headlands
+ov <- st_over(prod_clean, st_geometry(field))
+prod_clean$Headland <- is.na(ov)
+
+plot(prod_clean["Headland"])
+
+prod_clean = prod_clean[!prod_clean$Headland,]
+
+plot(prod_clean['Yield_ton_ha'])
+
 
 
 
