@@ -49,14 +49,21 @@ qtm(pols)
 qtm(pols, fill = "id")
 
 ## creat a buffer - objective: exclude the heaslands ----------------------
-field_b = st_buffer(field, dist = -18)
+field_b = st_buffer(field, dist = -12)
 ##qtm(CE, symbols.col =  'CE_15000')
 ##qtm(field_b)
 ##dev.off()
 
 ##use the function tmap to overlay - by jeovano
 tm <- tm_shape(pols) + tm_polygons("id")
-tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000')
+tm + tm_shape(field) + tm_borders(lwd = 3)
+dev.off()
+
+
+##tm + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(field) + tm_borders(lwd = 4) + tm_shape(CE) + tm_symbols('CE_15000', col = 'CE_15000')
+
+tm_shape(field) + tm_borders(lwd = 2) + tm_shape(field_b) + tm_borders(lwd = 3) + tm_shape(CE) +
+tm_symbols(col = 'CE_15000')
 
 ## clip the data using the created buffer ---------------------------------
 
@@ -108,12 +115,16 @@ plot(v,model = m, plot.numbers = TRUE,
 
 
 ## ordinary kriging -----------------------------------------------------
-OK = krige(CE_15000 ~ 1, CE, newdata = grid,
+OK_krige = krige(CE_15000 ~ 1, CE, newdata = grid,
+           model = m, maxdist = 100, nmax = 10)
+
+## ordinary IDW-----------------------------------------------------
+OK_idw = idw(CE_15000 ~ 1, CE, newdata = grid,
            model = m, maxdist = 100, nmax = 10)
 
 ## crop to the original boudary -----------------------------------------
 
-map = st_intersection(OK, field)
+map = st_intersection(OK_krige, field)
 plot(map['var1.pred'])
 
 plot(CE['CE_15000'])
