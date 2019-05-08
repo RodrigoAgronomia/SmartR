@@ -1,5 +1,6 @@
 #Libraries
 library(sf)
+library(readxl)
 
 ## create a new function
 st_over <- function(x, y) {
@@ -8,7 +9,7 @@ st_over <- function(x, y) {
 
 #Read the data
 data = read.csv('data/Colheita_Soja.csv')
-field <- read_sf("data/Boundary_colheita_Soja.shp")
+field = read_sf("data/Boundary_colheita_Soja.shp")
 
 #Transform to spatial data
 data = st_as_sf(data, coords = c('Longitude', 'Latitude'), crs = 4326)
@@ -17,8 +18,13 @@ data = st_as_sf(data, coords = c('Longitude', 'Latitude'), crs = 4326)
 prod = st_transform(data, 32722)
 
 st_coordinates(field)
-field = st_transform(field, 26915)
+field = st_transform(field, 32722)
 st_coordinates(field)
+
+plot(field, col = 'transparent', reset = FALSE)
+plot(prod['Yld.Mass.Dry..tonne.ha.'], add = TRUE)
+
+dev.off()
 
 #Histogram to grain moisture
 hist(prod$Moisture...)
@@ -63,5 +69,7 @@ prod_clean = prod_clean[!prod_clean$Headland,]
 plot(prod_clean['Yield_ton_ha'])
 
 
+prod_clean = st_intersection(prod_clean, field)
+plot(prod_clean['Yield_ton_ha'])
 
 
