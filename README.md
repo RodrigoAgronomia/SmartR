@@ -156,3 +156,7 @@ https://mediaspace.illinois.edu/media/t/1_9srtfxic
 ## Pacote "gstat" (30/04/2019)
 
 https://mediaspace.illinois.edu/media/t/0_kl2vp986
+
+## Filtragem de dados - Colheita (07/05/2019)
+
+https://youtu.be/NeSFMY-T7X4

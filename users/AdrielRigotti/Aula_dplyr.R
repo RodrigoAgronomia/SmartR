@@ -62,3 +62,6 @@ qtm(rst$sim1)
 qtm(pols_rsm, 'sim1')
 
 write_sf(pols_rsm, "data/pols_rsm.gpkg")
+#tarefa calcular utilizando os quatro metodos, o do martelo, o do Renan e terceiro do trevis, o quarto esse das funcões e o do pi pi..
+#comentar oque entendemos, calcular a media, mediana e o devio padrão.
+#calcular mais de uma estatistica para agregar os pontos.
