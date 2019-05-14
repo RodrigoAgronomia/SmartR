@@ -58,12 +58,10 @@ str(prod_clean$Yld.Mass.Dry..tonne.ha.)
 sd_y = sd(prod$Yld.Mass.Dry..tonne.ha.)
 mean_y = mean(prod$Yld.Mass.Dry..tonne.ha.)
 median_y = median(prod$Yld.Mass.Dry..tonne.ha.)
+quanti_y = quantile(prod$Yld.Mass.Dry..tonne.ha.,0.75)
 
 prod_clean = prod_clean[prod_clean$Yld.Mass.Dry..tonne.ha. < 7,]
-prod_clean2 = prod_clean2[prod_clean2$Yld.Mass.Dry..tonne.ha. < 7,]
-
 hist(prod_clean$Yld.Mass.Dry..tonne.ha.)
-hist(prod_clean2$Yld.Mass.Dry..tonne.ha.)
 
 #Change the column name
 names(prod_clean)[17] = 'Yield_ton_ha'
