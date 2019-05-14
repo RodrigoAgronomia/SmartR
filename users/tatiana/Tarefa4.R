@@ -40,12 +40,16 @@ table(prod$Moisture...<0)
 #media +ou - 2 dp
 sd_moi = sd(prod$Moisture...)
 mean_moi = mean(prod$Moisture...)
+cv = (100*sd_moi)/mean_moi
 
 crit = prod$Moisture...>(mean_moi-2*sd_moi) & prod$Moisture...<(mean_moi+2*sd_moi)
+crit2 = prod$Moisture...>(mean_moi-2*cv) & prod$Moisture...<(mean_moi+2*cv)
 
 prod_clean = prod[crit,] #selecao dos dados que atendem criterio
+prod_clean2 = prod[crit2,]
 
 hist(prod_clean$Moisture...)
+hist(prod_clean2$Moisture...)
 
 #Criteria to filter data based on Yield
 hist(prod_clean$Yld.Mass.Dry..tonne.ha.)
@@ -53,10 +57,13 @@ str(prod_clean$Yld.Mass.Dry..tonne.ha.)
 
 sd_y = sd(prod$Yld.Mass.Dry..tonne.ha.)
 mean_y = mean(prod$Yld.Mass.Dry..tonne.ha.)
+median_y = median(prod$Yld.Mass.Dry..tonne.ha.)
 
 prod_clean = prod_clean[prod_clean$Yld.Mass.Dry..tonne.ha. < 7,]
+prod_clean2 = prod_clean2[prod_clean2$Yld.Mass.Dry..tonne.ha. < 7,]
 
 hist(prod_clean$Yld.Mass.Dry..tonne.ha.)
+hist(prod_clean2$Yld.Mass.Dry..tonne.ha.)
 
 #Change the column name
 names(prod_clean)[17] = 'Yield_ton_ha'
@@ -77,5 +84,3 @@ plot(prod_clean['Yield_ton_ha'])
 #Outra forma de deletar pontos fora do talhao
 prod_clean = st_intersection(prod_clean,field) #sobreposicao espacial
 plot(prod_clean['Yield_ton_ha'])
-
-#Tarefa criar mediana

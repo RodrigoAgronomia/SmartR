@@ -12,6 +12,7 @@ st_over <- function(x, y) {
 ## read data --------------------------------------------------------------
 CE <- readRDS("data/dataCE.rds") #Condutividade
 field <- readRDS("data/fieldCE.rds") #Limite
+field_buf = st_buffer(field, dist=20) #Buffer
 
 ## change the CRS ---------------------------------------------------------
 #CE = st_transform(CE,4326) #Se estivesse em lat long
@@ -113,10 +114,16 @@ pred = mask(crop(OK,field),field)
 #plot(pred)
 qtm(pred)
 
-#Tentativa overlay
-  tm_raster('pred') +
-  tm_shape(field_b) + tm_borders() +
-  tm_compass(position = c("left", "bottom")) +
-  tm_scale_bar(position = c("left", "bottom")) +
-  tm_credits('Author', size = 0.7, align = "left", position = c("left", "bottom")) +
-  tm_legend(scale = 0.8)
+#Overlay
+  tm_shape(field_buf) + tm_borders(lwd=1, col='transparent') +
+  tm_shape(field) + tm_borders(lwd=2) +
+  tm_shape(grid) + tm_borders(col='blue', lwd=2) +
+  tm_shape(CE) + tm_symbols(col='red', scale=0.5) +
+  #tm_symbols(col = "CE_15000", scale = .5) +
+  #tm_legend(scale = 0.8, position = c("left", "bottom")) +
+  #tm_grid(alpha = 0.2, labels.rot = c(0,90), labels.inside.frame = FALSE) +
+  tm_compass(size = 4, position = c("right", "top")) +
+  tm_credits('Author', size = 1, align = "right", position = c("left", "bottom")) +
+  tm_scale_bar(size = 1, position = c("left", "bottom"))
+  
+#tmap_arrange(tm1,tm2)
