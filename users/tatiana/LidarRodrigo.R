@@ -17,7 +17,7 @@ summary(las)
 #sublas = lasclip(las_esalq, poligono)
 
 #Extracao de metricas
-p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 10)
+p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 1)
 plot(p95, xlab="UTM Easting", ylab="UTM Northing")
 hist(p95, xlab="Elevação (metros)", ylab="Frequência")
 
@@ -35,7 +35,7 @@ plot(chm2, xlab="UTM Easting", ylab="UTM Northing")
 hist(chm2, xlab="Elevação (metros)", ylab="Frequência")
 
 #Gerar DTM
-dtm = grid_terrain(las, algorithm = tin())
+dtm = grid_terrain(las, 1, tin())
 plot(dtm, xlab="UTM Easting", ylab="UTM Northing")
 hist(dtm, xlab="Elevação (metros)", ylab="Frequência")
 
