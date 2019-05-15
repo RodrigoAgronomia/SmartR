@@ -47,10 +47,13 @@ st_utm = function(sf_obj) {
 rst <- readRDS("data/simul.rds")
 field <- readRDS("data/field.rds")
 field2 <- readRDS("data/sample_field.rds")
+
 field2 <- st_utm(field2)
 
 ## make clusters
-clus = kmeans(rst$sim1[], 4)
+clus = kmeans(rst$sim1[], 4, nstart = 100)
+
+plot(rst$sim1[], col = clus$cluster)
 
 ## create raster with the clusters:
 rst$clus = clus$cluster
@@ -64,6 +67,10 @@ clus = kmeans(rst[[1:2]][], 4)
 
 ## create raster with the clusters:
 rst$clus = clus$cluster
+
+clus$centers
+
+plot(rst$sim1[], rst$sim2[], col = clus$cluster)
 
 ## compare result:
 plot(rst[[c('sim1','sim2','clus')]])
@@ -84,6 +91,9 @@ plot(rst[[c('sim1','sim2','clus')]])
 ## make clusters
 clus = kmeans(rpts[1:4], 4)
 
+sd(rpts[,1])
+sd(rpts[,3])
+
 ## create raster with the clusters:
 rst$clus = clus$cluster
 
@@ -100,10 +110,19 @@ rst$clus = clus$cluster
 plot(rst[[c('sim1','sim2','clus')]])
 
 ## make clusters
-clus = kmeans(rpts[1:2], 50)
+clus = kmeans(rpts[1:2], 50, nstart = 100, iter.max = 100)
 
 plot(st_geometry(field))
 points(clus$centers)
+
+grd_regular = st_make_grid(field, n = sqrt(50), what = 'centers')
+points(st_coordinates(grd_regular), col = 'red')
+
+
+grd_regular = st_make_grid(field2, n = sqrt(50), what = 'centers')
+grd_regular = st_intersection(grd_regular, field2)
+plot(st_geometry(field2))
+points(st_coordinates(grd_regular), col = 'red')
 
 
 grd = st_make_grid(field2, cellsize = 10, what = 'centers')
@@ -115,5 +134,12 @@ points(grd_pts, pch = '.')
 
 
 ## make clusters
-clus = kmeans(grd_pts, 100)
+clus = kmeans(grd_pts, 50, nstart = 10, iter.max = 100)
 points(clus$centers, col = 'red', pch = 20)
+points(grd_pts, pch = '.', col = clus$cluster)
+
+'voronoi'
+
+#Tarefa:
+# Definir poligonos para amostragem em celulas
+# Definir pontos das cubamostras em cada celula (15)
