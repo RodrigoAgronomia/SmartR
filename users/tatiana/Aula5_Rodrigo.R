@@ -3,7 +3,6 @@ library(sf)
 library(raster)
 library(dplyr)
 
-
 st_utm = function(sf_obj) {
   # Function to get UTM Zone from mean longitude:
   long2UTM <- function(long) {
@@ -41,8 +40,6 @@ st_utm = function(sf_obj) {
   }
 }
 
-
-
 ## read data --------------------------------------------------------------
 rst <- readRDS("data/simul.rds")
 field <- readRDS("data/field.rds")
@@ -57,7 +54,6 @@ rst$clus = clus$cluster
 
 ## compare result:
 plot(rst[[c('sim1','clus')]])
-
 
 ## make clusters
 clus = kmeans(rst[[1:2]][], 4) #cluster com as duas camadas .[]somente os numeros
@@ -81,7 +77,6 @@ rst$clus = clus$cluster
 
 ## compare result:
 plot(rst[[c('sim1','sim2','clus')]])
-
 
 ## make clusters
 clus = kmeans(rpts[1:4], 4)
@@ -114,14 +109,12 @@ points(st_coordinates(grd_regular), col='red')
 grd_regular = st_make_grid(field2, n=sqrt(50), what='centers')
 points(st_coordinates(grd_regular), col='red')
 
-
 grd = st_make_grid(field2, cellsize = 100, what = 'centers') #100 pontos por ha
 grd = st_intersection(grd, field2)
 grd_pts = st_coordinates(grd)
 
 plot(as_Spatial(field2))
 points(grd_pts, pch = '.')
-
 
 ## make clusters
 clus = kmeans(grd_pts, 50)
