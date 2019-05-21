@@ -1,3 +1,10 @@
+#Aquisicao de imagens de satelite manualmente
+# https://earthexplorer.usgs.gov/
+# https://scihub.copernicus.eu/dhus/#/home
+
+#Como automatizar? APIs
+# https://github.com/16EAGLE/getSpatialData
+
 #Bibliotecas
 library(sf)
 library(raster)
@@ -15,7 +22,10 @@ password = 'f=330180125'
 #Funcao que realiza o login na sua conta
 login_CopHub(user, password)
 
-## Define o AOI (podendo ser uma matriz, sf ou sp objeto)
+#Desenhar a area de interesse para busca das imagens
+set_aoi() #Chamar set_aoi() sem argumentos,abre um mapedit editor
+
+## Outra forma e definir o AOI (podendo ser uma matriz, sf ou sp objeto)
 contorno = read_sf('data/Boundary_colheita_Soja.shp')
 contorno = st_as_sf(contorno)
 
@@ -23,11 +33,10 @@ contorno = st_as_sf(contorno)
 set_aoi(st_geometry(contorno))
 view_aoi() #abre o AOI no viewer
 
-#Outra opcao e desenhar a area que se busca as imagens
-set_aoi() #Chamar set_aoi() sem argumentos,abre um mapedit editor
+
 
 #Define o local onde salvar as imagens
-set_archive("C:/Users/felip")
+set_archive("C:/Images")
 
 ## Use getSentinel_query para pesquisar as imagens que possuem o AOI
 records = getSentinel_query(time_range = c("2019-03-01", "2019-03-30"), 
@@ -35,10 +44,10 @@ records = getSentinel_query(time_range = c("2019-03-01", "2019-03-30"),
 
 ## Filtrar os resultados
 colnames(records) #apresenta todos os atributos diponiveis para a filtragem 
-unique(records$processinglevel) 
+unique(records$cloudcoverpercentage) 
 
 #filtra pr porcetagem de recobrimento de nuvens
-records_filtered = records_filtered[as.numeric(records_filtered$cloudcoverpercentage) <= 30, ] 
+records_filtered = records_filtered[as.numeric(records_filtered$cloudcoverpercentage) <= 15, ] 
 
 ## Apresenta a tabela com os resultados iniciais
 View(records)
@@ -52,9 +61,7 @@ getSentinel_preview(record = records_filtered[3,])
 datasets <- getSentinel_data(records = records_filtered[3, ])
 
 ## Define o formato do output
-datasets_prep <- prepSentinel(datasets)
-
-?prepSentinel
+datasets = list.files("Y:/", full.names = T)
 
 #VRT
 datasets_prep <- prepSentinel(datasets, format = "vrt")
