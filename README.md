@@ -117,7 +117,7 @@ Ler um pouco mais sobre o básico do R - https://rstudio-education.github.io/hop
     
 9. Acesse as video aulas relacionadas a este tópico em: https://youtu.be/eObPJKlsnxo e https://youtu.be/fgY7TKHdHPI 
 
-## Aula 3 -  Atividades
+## Aula 3 -  Lidando com arquivos espaciais
 
 *Autor:  Felippe Karp*
 
@@ -139,6 +139,45 @@ Agora que já sabemos como lidar com um "data frame", vamos complicar um pouquin
 4. TAREFA: Utilizando os arquivos criados, criar critérios de seleção dos dados (ex.: Produtividade > Média da Produtividade) e gerar mapas.
 
 5. Acesse a video aula em: https://youtu.be/vG84WpvDYzA
+
+## Aula 4 -  Continuação lidando com arquivos espaciais e apresentação de resultados
+
+*Autor:  Felippe Karp*
+
+Nesta aula vamos aprender um pouco sobre como podemos manipular arquivos espaciais no R. Ou seja, como posso trabalhar com a tabela de atributos do meu objeto para fazer seleções, realizar buffer, sobrepor dois objetos, recortar um objeto baseado em outro e realizar a plotagem dos resutlados. 
+
+1. Primeiro passo é a utilização da biblioteca que vai permitir a gente trabalhar com dados espaciais. Conforme comentamos em outras aulas, existe mais de uma biblioteca que pode ser utilizada. Contudo, já que a sf é a que nos permite obter a melhor perfomance, é esta que vamos usar! Além dessa bibliotea, vamos também utilizar a biblioteca tmap e tmaptools. Se você ainda nao tem elas instaladas, nao se esqueça, realiza a instalação antes de "chamar" ela no script;
+
+2. Realizar a abertura dos dados que iremos trabalhar;
+    - Na pasta data acessar o arquivo 'dataCE';
+    - Uma das formas de acessar este arquivo é listar todos os arquivos da pasta data que tem o padrão ("pattern") '.rds';
+    - Posteriormente, podemos utilizar a funcao grep() e procurar dentre estes arquivos aquele que possui 'dataCE' no nome;
+    - Após atribuir o caminho do arquivo a um objeto, este objeto será o parametro da função readRDS() e a assim terá a leitura do arquivo;
+
+3. Realizar o mesmo processo do item 2 para o contorno desta área que possui o nome 'fieldCE';
+
+4. Checar e converter as coordenadas para UTM usando a função st_transform() e crs = 32615;
+
+5. Usar a função plot() e seus parâmetros col, reset e add para plotar o contorno e os pontos no mesmo mapa;
+
+6. Criar um buffer do contorno original utilizando a função st_buffer() - desde que os dados estejam em UTM o parametro dist desta função terá como unidade de medida o metro. Portanto, se o valor atribuido for 5, será equivalente a 5 m. IMPORTANTE: Se o valor for positivo, o buffer será positivo e vice-versa.
+
+7. Recortar o arquivo de pontos com base no buffer criado - função st_intersection;
+
+8. Realizar filtragem e seleção dos dados conforme a tabela de atributos;
+
+9. Plotagem dos dados utilizando o tmap;
+
+10. Acesse a video aula em: https://www.youtube.com/watch?v=yGrMKvOdjO4
+
+
+## Aula 5 -  Geoestatística
+
+*Autor:  Felippe Karp*
+
+1. Acesse a video aula em: https://www.youtube.com/watch?v=lI58j5_R8Tg 
+
+
 
 
 ## Introdução ao R e GitHub (09/04/2019)
