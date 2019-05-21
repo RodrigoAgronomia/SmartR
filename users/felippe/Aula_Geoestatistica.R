@@ -29,8 +29,8 @@ plot(CE['CE_15000'], reset = FALSE)
 plot(field, col = 'transparent', add = TRUE)
 dev.off()
 
-## creat a buffer - objective: exclude the heaslands ----------------------
-field_b = st_buffer(field, dist = -8)
+## creat a buffer - objective: exclude the headlands ----------------------
+field_b = st_buffer(field, dist = -6)
 
 plot(CE['CE_15000'], reset = FALSE)
 plot(field_b, col = 'transparent', add = TRUE)
@@ -53,6 +53,7 @@ plot(CE['CE_15000'])
 
 ## creat a grid to interpolate -------------------------------------------
 grid = st_make_grid(field, cellsize = c(10, 10))
+plot(grid)
 
 ## start geostatiscal analysis -  create the objects of analysis ---------
 gOK = gstat(NULL,'CE', CE_15000 ~ 1, CE, nmax = 100)
@@ -78,7 +79,14 @@ plot(v,model = m, plot.numbers = TRUE,
 OK = krige(CE_15000 ~ 1, CE, newdata = grid,
            model = m, maxdist = 100, nmax = 10)
 
+plot(OK)
+
 ## crop to the original boudary -----------------------------------------
 map = st_intersection(OK, field)
 plot(map['var1.pred'])
 plot(CE['CE_15000'])
+
+tm <- tm_shape(map) + tm_polygons("var1.pred", style = "quantile", palette = 'Blues')
+tm
+
+write_sf(map, 'users/felippe/Mapa_interpolado.shp')
