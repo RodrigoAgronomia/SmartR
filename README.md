@@ -204,15 +204,15 @@ https://youtu.be/NeSFMY-T7X4
 
 
 
-## Aquisição de imagens de satélite
+## Aquisição de imagens de satélite (21/05/2019)
 
-*Autor: Isac Oliveira
+*Autor: Isac Oliveira*
 
-*link: 
+*link:* 
 
-Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando getSpatialData (https://github.com/16EAGLE/getSpatialData). 
+Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando *getSpatialData* (https://github.com/16EAGLE/getSpatialData). 
 
-1. Criar um usuário para o CoperHub - https://scihub.copernicus.eu/dhus/#/self-registration ;
+1. Criar um usuário para o *CoperHub* - https://scihub.copernicus.eu/dhus/#/self-registration ;
 
 2. Definir a área de interesse, por desenho manual ou arquivo;
 
@@ -222,6 +222,6 @@ Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando ge
 
 5. Filtrar os resultados, pré visualização;
 
-6. Definição do formato do output e download das imagens.
+6. Definição do formato do *output* e *download* das imagens.
 
-TAREFA: Recortar apenas a área de interesse, salvá-las e excluir as imagens inteiras, a fim de reduzir o armazenamento utilizado.
+-> TAREFA: Recortar apenas a área de interesse, salvá-las e excluir as imagens inteiras, a fim de reduzir o armazenamento utilizado.
