@@ -208,7 +208,7 @@ https://mediaspace.illinois.edu/media/t/1_pedae8i4
 
 *Autor: Isac Oliveira*
 
-*link:* 
+*link: https://www.youtube.com/watch?v=pPgbebd7eY4* 
 
 Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando *getSpatialData* (https://github.com/16EAGLE/getSpatialData). 
 
