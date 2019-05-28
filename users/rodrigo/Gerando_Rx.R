@@ -24,6 +24,7 @@ plotRGB(rst, stretch = 'lin')
 
 # Aplly the linear stretch to create a new raster:
 rst_m <- stretch(rst[[1:3]], minq = 0.02, maxq = 0.98)
+rst_m[is.na(rst_m)] = 255
 
 # Show the false-color representation of the image using tmap:
 tm_shape(field) + tm_borders() +
@@ -33,6 +34,7 @@ tm_shape(field) + tm_borders() +
 # Crop the raster to the field extend and mask cells outside of the field:
 rst_c = mask(crop(rst, field), field)
 rst_mc = mask(crop(rst_m, rst_c), rst_c$B3)
+rst_mc[is.na(rst_mc)] = 255
 
 # Show the false-color representation of the image:
 plotRGB(rst_c, stretch = 'lin')
@@ -90,7 +92,6 @@ hist(Rx_N[])
 # Adjust the extreme rates:
 Rx_N[NDVI < min(df_rx$VI)] = max(df_rx$N, na.rm = TRUE)
 Rx_N[NDVI > max(df_rx$VI)] = min(df_rx$N, na.rm = TRUE)
-Rx_N = round(Rx_N)
 
 # Show the frequency distribution of the N rates:
 hist(Rx_N[])
@@ -115,7 +116,6 @@ hist(Rx_PGR[])
 # Adjust the extreme rates:
 Rx_PGR[NDVI < min(df_rx$VI)] = 0
 Rx_PGR[NDVI > max(df_rx$VI)] = max(df_rx$PGR, na.rm = TRUE)
-Rx_PGR = round(Rx_PGR)
 names(Rx_PGR) = 'Rate'
 
 # Show the frequency distribution of the PGR rates:
@@ -142,6 +142,7 @@ save_rx = function(r, file){
 }
 
 # Save the prescription maps:
+dir.create('data/Rx')
 save_rx(Rx_N, 'data/Rx/Rx_N.shp')
 save_rx(Rx_PGR, 'data/Rx/Rx_PGR.shp')
 
