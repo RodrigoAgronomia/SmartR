@@ -35,18 +35,15 @@ plot(st_geometry(pols20),lwd=3,add=TRUE)
 plot(rst_pts20,add=TRUE)
 
 #Construção do loop para extrair a média de cada poligono do grid de 1 ha;
-for (i in pols$id) {
+for (i in pols$id){
   subpol<-pols[pols$id==i,]
   subpol
-  sub_pts_rst<-rst_pts[subpol,]
-  sub_pts_rst
+  sub_pts<-rst_pts[subpol,]
+  sub_pts
   for (v in names(rst_pts)[1:10]){              #Loop para atribuição das médias de cada poligono;
-    pols[pols$id==i,v]<-mean(sub_pts_rst[[v]])
+  pols[pols$id==i,v]<-mean(sub_pts[[v]])
   }
-}
-
-pols[[v]]
-plot(pols[[v]])
+  }
 
 
 #FIM!

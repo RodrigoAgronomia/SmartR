@@ -33,8 +33,6 @@ contorno = st_as_sf(contorno)
 set_aoi(st_geometry(contorno))
 view_aoi() #abre o AOI no viewer
 
-
-
 #Define o local onde salvar as imagens
 set_archive("C:/Images")
 
