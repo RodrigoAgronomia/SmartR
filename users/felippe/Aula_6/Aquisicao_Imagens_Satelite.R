@@ -44,10 +44,10 @@ records = getSentinel_query(time_range = c("2019-03-01", "2019-03-30"),
 
 ## Filtrar os resultados
 colnames(records) #apresenta todos os atributos diponiveis para a filtragem 
-unique(records$cloudcoverpercentage) 
+unique(records$processinglevel) 
 
 #filtra pr porcetagem de recobrimento de nuvens
-records_filtered = records_filtered[as.numeric(records_filtered$cloudcoverpercentage) <= 15, ] 
+records_filtered = records[as.numeric(records$cloudcoverpercentage) <= 15, ] 
 
 ## Apresenta a tabela com os resultados iniciais
 View(records)
@@ -72,4 +72,9 @@ datasets_prep[[1]][[1]][2] #20 m
 datasets_prep[[1]][[1]][3] #60 m 
 
 ## Abre os arquivos direto do diretorio no R
-r <- stack(datasets_prep[[1]][[1]][1])
+r = stack(datasets_prep[[1]][[1]][1])
+plot(r)
+
+contorno = as(contorno, 'Spatial')
+
+r = mask(crop(r, contorno), contorno)
