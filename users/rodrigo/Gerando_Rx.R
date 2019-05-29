@@ -9,9 +9,9 @@ field = readRDS('data/field_sat.rds')
 plot(field)
 
 # Import one of the Sentinel images:
-rst = stack('data/Images/S2B_tile_20190525.TIF')
+#rst = stack('data/Images/S2B_tile_20190525.TIF')
 rst = stack('data/Images/S2A_tile_20190520.TIF')
-rst = stack('data/Images/S2B_tile_20190515.TIF')
+#rst = stack('data/Images/S2B_tile_20190515.TIF')
 
 # Reproject the vector to the same CRS of the raster:
 field = st_transform(field, crs(rst)@projargs)
@@ -97,6 +97,7 @@ Rx_N[NDVI > max(df_rx$VI)] = min(df_rx$N, na.rm = TRUE)
 hist(Rx_N[])
 names(Rx_N) = 'Rate'
 
+plot(Rx_N)
 
 # Show the the nitrogen prescription map using tmap:
 tm_shape(field) + tm_borders() +
@@ -131,20 +132,25 @@ tm_shape(field) + tm_borders() +
 plot(NDVI[], Rx_N[], pch = '.', col = 'red', ylim = c(0,150))
 points(NDVI[], Rx_PGR[], pch = '.', col = 'blue')
 
-
 # Define a function to prepare the Rx map and save it:
-save_rx = function(r, file){
+save_rx = function(r, file, resolution = 10){
+  rr = r
+  res(rr) <- resolution
+  r = projectRaster(r, rr)
   pols = rasterToPolygons(r)
   pols = st_as_sf(pols)
   pols = st_transform(pols, 4326)
+  pols$Rate = round(pols$Rate)
   write_sf(pols, file)
   return(TRUE)
 }
 
 # Save the prescription maps:
 dir.create('data/Rx')
-save_rx(Rx_N, 'data/Rx/Rx_N.shp')
-save_rx(Rx_PGR, 'data/Rx/Rx_PGR.shp')
+save_rx(Rx_N, 'data/Rx/Rx_N.shp', 20)
+save_rx(Rx_PGR, 'data/Rx/Rx_PGR.shp', 30)
 
 
-
+# Atividade:
+# Elaborar comparativo de doses considerando as tres datas das imagens e tres resolucoes espaciais (1, 20 e 30 m)
+# 9 recomendacoes de cada (N e PGR) = 18 rec
