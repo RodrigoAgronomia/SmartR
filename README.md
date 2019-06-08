@@ -229,3 +229,12 @@ Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando *g
 ## Gerando mapas de recomendação (28/05/2019)  
 
 https://mediaspace.illinois.edu/media/t/1_rcwoft8h
+
+## Desenvolvimento do Pacote para AP no R
+
+https://mediaspace.illinois.edu/media/t/1_m124rgpj
+
+
+
+
+
