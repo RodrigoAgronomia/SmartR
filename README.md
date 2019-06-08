@@ -225,3 +225,7 @@ Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando *g
 6. Definição do formato do *output* e *download* das imagens.
 
 -> TAREFA: Recortar apenas a área de interesse, salvá-las e excluir as imagens inteiras, a fim de reduzir o armazenamento utilizado.
+
+## Gerando mapas de recomendação (28/05/2019)  
+
+https://mediaspace.illinois.edu/media/t/1_rcwoft8h
