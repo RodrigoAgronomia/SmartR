@@ -9,15 +9,17 @@
 library(sf)
 library(raster)
 library(rgdal)
+library(fs)
 library(getSpatialData)
+library(devtools)
 
 # Se ainda nao tiver o pacote 'devtools' instalado, realizar a instalacao:
 # install.packages('devtools')
 devtools::install_github("16EAGLE/getSpatialData")
 
 #Criar um usuario para o CoperHub - https://scihub.copernicus.eu/dhus/#/self-registration
-user = 'feh_karp'
-password = 'f=330180125'
+user = 'renantavanti'
+password = 'zz'
 
 #Funcao que realiza o login na sua conta
 login_CopHub(user, password)
