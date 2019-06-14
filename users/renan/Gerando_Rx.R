@@ -57,17 +57,38 @@ tm_shape(field3) + tm_borders() +
 
 # Crop the raster to the field extend and mask cells outside of the field:
 # Recorte pelo principio 1° Crop (recorte pelo limite), 2° mask (pixels fora da borda com valor NA atributido)
-rst_c = mask(crop(rst, field), field) #Fazendo para o raster orginal
-rst_mc = mask(crop(rst_m, rst_c), rst_c$B3) #Fazendo para o raster do stretch; PS: está sendo usado o raster original como parâmetro de corte ao invés dos limites
-rst_mc[is.na(rst_mc)] = 255 #Atributindo o branco ao NA
+#Raster 1
+rst_c1 = mask(crop(rst1, field1), field1) #Fazendo para o raster orginal
+rst_mc1 = mask(crop(rst_m1, rst_c1), rst_c1$B3) #Fazendo para o raster do stretch; PS: está sendo usado o raster original como parâmetro de corte ao invés dos limites
+rst_mc1[is.na(rst_mc1)] = 255 #Atributindo o branco ao NA
+
+#Raster 2
+rst_c2 = mask(crop(rst2, field2), field2) #Fazendo para o raster orginal
+rst_mc2 = mask(crop(rst_m2, rst_c2), rst_c2$B3) #Fazendo para o raster do stretch; PS: está sendo usado o raster original como parâmetro de corte ao invés dos limites
+rst_mc2[is.na(rst_mc2)] = 255 #Atributindo o branco ao NA
+
+#Raster 3
+rst_c3 = mask(crop(rst3, field3), field3) #Fazendo para o raster orginal
+rst_mc3 = mask(crop(rst_m3, rst_c3), rst_c3$B3) #Fazendo para o raster do stretch; PS: está sendo usado o raster original como parâmetro de corte ao invés dos limites
+rst_mc3[is.na(rst_mc3)] = 255 #Atributindo o branco ao NA
 
 # Show the false-color representation of the image:
-plotRGB(rst_c, stretch = 'lin')
+plotRGB(rst_c1, stretch = 'lin')
+plotRGB(rst_c2, stretch = 'lin')
+plotRGB(rst_c3, stretch = 'lin')
 
 # Show the false-color representation of the image using tmap:
-tm_shape(field) + tm_borders() +
-  tm_shape(rst_mc) + tm_rgb() + 
-  tm_shape(field) + tm_borders(lwd = 3, col = 'blue')
+tm_shape(field1) + tm_borders() +
+  tm_shape(rst_mc1) + tm_rgb() + 
+  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
+
+tm_shape(field2) + tm_borders() +
+  tm_shape(rst_mc2) + tm_rgb() + 
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
+
+tm_shape(field2) + tm_borders() +
+  tm_shape(rst_mc2) + tm_rgb() + 
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
 
 
 # Define a function to calculate vegetation index:
@@ -79,27 +100,47 @@ calc_VI = function(B1, B2){
 }
 
 # Calc the NDVI:
-NDVI = calc_VI(rst_c$B4, rst_c$B8)
+NDVI1 = calc_VI(rst_c1$B4, rst_c1$B8)
+NDVI2 = calc_VI(rst_c2$B4, rst_c2$B2)
+NDVI3 = calc_VI(rst_c3$B4, rst_c3$B3)
 
 dev.off()
 # Show the frequency distribution of the NDVI values:
-hist(NDVI[])
+hist(NDVI1[])
+hist(NDVI2[])
+hist(NDVI3[])
 
 # Adjust very low NDVI points:
 # Setando valores do último quantil (baixos valores de NDVI) para corresponder a um mesmo valor
-NDVI[NDVI < quantile(NDVI, 0.01)] = quantile(NDVI, 0.01)
+NDVI1[NDVI1 < quantile(NDVI1, 0.01)] = quantile(NDVI1, 0.01)
+NDVI2[NDVI2 < quantile(NDVI2, 0.01)] = quantile(NDVI2, 0.01)
+NDVI3[NDVI3 < quantile(NDVI3, 0.01)] = quantile(NDVI3, 0.01)
 
 # Show the frequency distribution of the NDVI values:
-hist(NDVI[])
+hist(NDVI1[])
+hist(NDVI2[])
+hist(NDVI3[])
 
 # Plot the NDVI map:
-plot(NDVI)
+plot(NDVI1)
+plot(NDVI2)
+plot(NDVI3)
 
 # Show the the NDVI map using tmap:
-tm_shape(field) + tm_borders() +
-  tm_shape(NDVI) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field) + tm_borders(lwd = 3, col = 'blue')
+mapNDVI1<-tm_shape(field1) + tm_borders() +
+  tm_shape(NDVI1) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
 
+mapNDVI2<-tm_shape(field2) + tm_borders() +
+  tm_shape(NDVI2) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
+
+mapNDVI3<-tm_shape(field3) + tm_borders() +
+  tm_shape(NDVI3) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue')
+
+tmap_mode("view")
+tmap_arrange(mapNDVI1,mapNDVI2,mapNDVI3)
 
 # Field based prescription of nitrogem and PGR:
 # Recomendação pelo NDVI "Ajuste teórico"
