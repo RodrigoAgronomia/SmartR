@@ -113,8 +113,8 @@ hist(NDVI3[])
 # Adjust very low NDVI points:
 # Setando valores do último quantil (baixos valores de NDVI) para corresponder a um mesmo valor
 NDVI1[NDVI1 < quantile(NDVI1, 0.01)] = quantile(NDVI1, 0.01)
-NDVI2[NDVI2 < quantile(NDVI2, 0.01)] = quantile(NDVI2, 0.01)
-NDVI3[NDVI3 < quantile(NDVI3, 0.01)] = quantile(NDVI3, 0.01)
+NDVI2[NDVI2 > quantile(NDVI2, 0.99)] = quantile(NDVI2, 0.99)
+NDVI3[NDVI3 > quantile(NDVI3, 0.98)] = quantile(NDVI3, 0.98)
 
 # Show the frequency distribution of the NDVI values:
 hist(NDVI1[])
@@ -132,51 +132,94 @@ mapNDVI1<-tm_shape(field1) + tm_borders() +
   tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
 
 mapNDVI2<-tm_shape(field2) + tm_borders() +
-  tm_shape(NDVI2) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(NDVI2) + tm_raster(palette = 'viridis', style = 'kmeans', n = 10) + 
   tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
 
 mapNDVI3<-tm_shape(field3) + tm_borders() +
-  tm_shape(NDVI3) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(NDVI3) + tm_raster(palette = 'viridis', style = 'kmeans', n = 10) + 
   tm_shape(field3) + tm_borders(lwd = 3, col = 'blue')
 
-tmap_mode("view")
+tmap_mode("plot")
 tmap_arrange(mapNDVI1,mapNDVI2,mapNDVI3)
 
 # Field based prescription of nitrogem and PGR:
 # Recomendação pelo NDVI "Ajuste teórico"
-df_rx = data.frame(VI = quantile(NDVI, c(0.1,0.25,0.5,0.75,0.9)), #Mostrando valores dos quartis que correspondem a 10, 25, 50, 75 e 90%
+df_rx1 = data.frame(VI = quantile(NDVI1, c(0.1,0.25,0.5,0.75,0.9)), #Mostrando valores dos quartis que correspondem a 10, 25, 50, 75 e 90%
                    N = c(130, 120, 100, 80, 60), #130 kg de N para valores correspondentes até os 10%; 120 kg para valores até 25%...
                    PGR = c(NA, 60, 80, 100, 120)) #Valores para o regulador de crescimento aplicado ao algodoeiro;
-plot(df_rx)
+
+#Mudar valores: O NDVI está negativo, a dose máxima e mínima fica invertida
+df_rx2 = data.frame(VI = quantile(NDVI2, c(0.1,0.25,0.5,0.75,0.9)), #Mostrando valores dos quartis que correspondem a 10, 25, 50, 75 e 90%
+                    N = c(130, 120, 100, 80, 60), #130 kg de N para valores correspondentes até os 10%; 120 kg para valores até 25%...
+                    PGR = c(NA, 60, 80, 100, 120)) #Valores para o regulador de crescimento aplicado ao algodoeiro;
+
+#Mudar valores: O NDVI está negativo, a dose máxima e mínima fica invertida
+df_rx3 = data.frame(VI = quantile(NDVI3, c(0.1,0.25,0.5,0.75,0.9)), #Mostrando valores dos quartis que correspondem a 10, 25, 50, 75 e 90%
+                    N = c(130, 120, 100, 80, 60), #130 kg de N para valores correspondentes até os 10%; 120 kg para valores até 25%...
+                    PGR = c(NA, 60, 80, 100, 120)) #Valores para o regulador de crescimento aplicado ao algodoeiro;
+
+
+plot(df_rx1)
+plot(df_rx2)
+plot(df_rx3)
+
 
 # Prescription model for N:
 # Criando modelo linear 2° grau para recomendação
-lm_N = lm(N ~ poly(VI, 2), df_rx)
+lm_N1 = lm(N ~ poly(VI, 2), df_rx1)
+lm_N2 = lm(N ~ poly(VI, 2), df_rx2)
+lm_N3 = lm(N ~ poly(VI, 2), df_rx3)
 
 # Predict the rate based on the model:
 # Predição no raster com base no modelo linear criado
-Rx_N = predict(NDVI, lm_N)
+Rx_N1 = predict(NDVI1, lm_N1)
+Rx_N2 = predict(NDVI2, lm_N2)
+Rx_N3 = predict(NDVI3, lm_N3)
 
 # Show the frequency distribution of the N rates:
-hist(Rx_N[])
+hist(Rx_N1[])
+hist(Rx_N2[])
+hist(Rx_N3[])
 
 # Adjust the extreme rates:
 # Ajustando a variação Max e Min com base na "Recomendação teórica". PS: o modelo tende a extrapolar valores.
-Rx_N[NDVI < min(df_rx$VI)] = max(df_rx$N, na.rm = TRUE)
-Rx_N[NDVI > max(df_rx$VI)] = min(df_rx$N, na.rm = TRUE)
+Rx_N1[NDVI1 < min(df_rx1$VI)] = max(df_rx1$N, na.rm = TRUE)
+Rx_N1[NDVI1 > max(df_rx1$VI)] = min(df_rx1$N, na.rm = TRUE)
+
+Rx_N2[NDVI2 < min(df_rx2$VI)] = max(df_rx2$N, na.rm = TRUE)
+Rx_N2[NDVI2 > max(df_rx2$VI)] = min(df_rx2$N, na.rm = TRUE)
+
+Rx_N3[NDVI3 < min(df_rx3$VI)] = max(df_rx3$N, na.rm = TRUE)
+Rx_N3[NDVI3 > max(df_rx3$VI)] = min(df_rx3$N, na.rm = TRUE)
 
 # Show the frequency distribution of the N rates:
 # Nomeando a camada "Layer" para "Rate"
-hist(Rx_N[])
-names(Rx_N) = 'Rate'
+hist(Rx_N1[])
+names(Rx_N1) = 'Rate'
+
+hist(Rx_N2[])
+names(Rx_N2) = 'Rate'
+
+hist(Rx_N3[])
+names(Rx_N3) = 'Rate'
 
 # Mostrando doses de aplicação
-plot(Rx_N)
+plot(Rx_N1)
+plot(Rx_N2)
+plot(Rx_N3)
 
 # Show the the nitrogen prescription map using tmap:
-tm_shape(field) + tm_borders() +
-  tm_shape(Rx_N) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field) + tm_borders(lwd = 3, col = 'blue')
+tm_shape(field1) + tm_borders() +
+  tm_shape(Rx_N1) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
+
+tm_shape(field2) + tm_borders() +
+  tm_shape(Rx_N2) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
+
+tm_shape(field3) + tm_borders() +
+  tm_shape(Rx_N3) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue')
 
 # Recomendação para o regulador de crescimento
 # Prescription model for PGR:
