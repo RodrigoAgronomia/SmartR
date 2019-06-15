@@ -2,6 +2,39 @@ library(sf)
 library(tmap)
 library(raster)
 
+#Aquisição de imagens --------------
+library(rgdal)
+library(fs)
+library(getSpatialData)
+library(devtools)
+
+user = 'renantavanti'
+password = 'chicoc91'
+
+#Funcao que realiza o login na sua conta
+login_CopHub(user, password)
+
+#Desenhar a area de interesse para busca das imagens
+set_aoi() #Chamar set_aoi() sem argumentos,abre um mapedit editor
+
+## Outra forma e definir o AOI (podendo ser uma matriz, sf ou sp objeto)
+contorno = readRDS('data/field_sat.rds')
+contorno = st_as_sfc(st_bbox(contorno))
+plot(contorno)
+
+# Define o AOI para esta secao
+set_aoi(st_geometry(contorno))
+view_aoi() #abre o AOI no viewer
+
+set_archive("D:/R/Imagens_sat")
+
+## Use getSentinel_query para pesquisar as imagens que possuem o AOI
+records = getSentinel_query(time_range = c("2019-03-01", "2019-03-30"), 
+                            platform = "Sentinel-2") #ou "Sentinel-1" ou "Sentinel-3"
+
+
+
+#Aula Recomendação ---------------
 # Import the field boundaries:
 field = readRDS('data/field_sat.rds')
 
@@ -23,6 +56,7 @@ field3 = st_transform(field, crs(rst3)@projargs)
 names(rst1) = c('B3', 'B8', 'B4', 'B2')
 names(rst2) = c('B3', 'B8', 'B4', 'B2')
 names(rst3) = c('B3', 'B8', 'B4', 'B2')
+str(rst1)
 
 # Show the false-color representation of the image:
 # Aplicou-se a conversão linear (pode usar a de distribuição) dos niveis de cor de cada banda para um intervalo que pode ser lido no plot (etre 0 e 255 "8 bits").
@@ -101,8 +135,8 @@ calc_VI = function(B1, B2){
 
 # Calc the NDVI:
 NDVI1 = calc_VI(rst_c1$B4, rst_c1$B8)
-NDVI2 = calc_VI(rst_c2$B4, rst_c2$B2)
-NDVI3 = calc_VI(rst_c3$B4, rst_c3$B3)
+NDVI2 = calc_VI(rst_c2$B4, rst_c2$B8)
+NDVI3 = calc_VI(rst_c3$B4, rst_c3$B8)
 
 dev.off()
 # Show the frequency distribution of the NDVI values:
@@ -115,6 +149,7 @@ hist(NDVI3[])
 NDVI1[NDVI1 < quantile(NDVI1, 0.01)] = quantile(NDVI1, 0.01)
 NDVI2[NDVI2 > quantile(NDVI2, 0.99)] = quantile(NDVI2, 0.99)
 NDVI3[NDVI3 > quantile(NDVI3, 0.98)] = quantile(NDVI3, 0.98)
+NDVI3[NDVI3 < quantile(NDVI3, 0.002)] = quantile(NDVI3, 0.002)
 
 # Show the frequency distribution of the NDVI values:
 hist(NDVI1[])
@@ -129,15 +164,15 @@ plot(NDVI3)
 # Show the the NDVI map using tmap:
 mapNDVI1<-tm_shape(field1) + tm_borders() +
   tm_shape(NDVI1) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue');mapNDVI1
 
 mapNDVI2<-tm_shape(field2) + tm_borders() +
-  tm_shape(NDVI2) + tm_raster(palette = 'viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(NDVI2) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue');mapNDVI2
 
 mapNDVI3<-tm_shape(field3) + tm_borders() +
-  tm_shape(NDVI3) + tm_raster(palette = 'viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(NDVI3) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
+  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue');mapNDVI3
 
 tmap_mode("plot")
 tmap_arrange(mapNDVI1,mapNDVI2,mapNDVI3)
@@ -209,17 +244,20 @@ plot(Rx_N2)
 plot(Rx_N3)
 
 # Show the the nitrogen prescription map using tmap:
-tm_shape(field1) + tm_borders() +
+mapRxN1<-tm_shape(field1) + tm_borders() +
   tm_shape(Rx_N1) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(field1) + tm_borders(lwd = 3, col = 'blue');mapRxN1
 
-tm_shape(field2) + tm_borders() +
+mapRxN2<-tm_shape(field2) + tm_borders() +
   tm_shape(Rx_N2) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(field2) + tm_borders(lwd = 3, col = 'blue');mapRxN2
 
-tm_shape(field3) + tm_borders() +
+mapRxN3<-tm_shape(field3) + tm_borders() +
   tm_shape(Rx_N3) + tm_raster(palette = '-viridis', style = 'kmeans', n = 10) + 
-  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue')
+  tm_shape(field3) + tm_borders(lwd = 3, col = 'blue');mapRxN3
+
+tmap_mode("plot")
+tmap_arrange(mapRxN1,mapRxN2,mapRxN3)
 
 # Recomendação para o regulador de crescimento
 # Prescription model for PGR:
