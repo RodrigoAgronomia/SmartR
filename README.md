@@ -230,7 +230,7 @@ Nessa aula Fellipe ensina como baixar imagens de satélite pelo R! utilizando *g
 
 https://mediaspace.illinois.edu/media/t/1_rcwoft8h
 
-## Desenvolvimento do Pacote para AP no R
+## PAR package - Apresentacao do Pacote (08/06/2019)
 
 https://mediaspace.illinois.edu/media/t/1_m124rgpj
 
