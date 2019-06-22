@@ -14,9 +14,18 @@
 # Funcoes que precisam de descricao ou ajustes:
 # - make_line
 # - get_coverage
-# - creat_polygons
+# - creat_polygons - Tati
 # - group_subplots
 # - sfc_as_cols
 # - to_line
 # - creat_lines
 # - make_trial
+
+
+#Sugestoes de Funcoes:
+# - Relatorio de analise descritiva - Renan Tavanti (Inicio no desenvolvimento de Funcoes)
+# - Filtragem de dados
+# - Processamento de images:
+## - Alinhamento de imagens de drone
+## - Filtragem
+## - Construcao de modelos 3D
