@@ -1,0 +1,5 @@
+> exl<-read.delim("clipboard", dec",", header=TRUE)
+> #install.packages("easyanova")
+> #install.packages("ExpDes.pt")
+> exl
+> library(easyanova)
